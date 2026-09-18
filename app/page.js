@@ -127,6 +127,7 @@ const [uploadedFile, setUploadedFile] = useState(null);
           </div>
         </aside>
       </section>           
+              
 <section>
   <h2>Upload Schedule or Syllabus</h2>
 
