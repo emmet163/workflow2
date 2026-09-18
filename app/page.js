@@ -177,10 +177,10 @@ const [uploadedFile, setUploadedFile] = useState(null);
     >
       Organize Schedule with AI
     </button>
-  </div>
-)}
-    
-      <footer>SchoolFlow • Starter build</footer>
+ </div>
+</section>
+
+<footer>SchoolFlow • Starter build</footer>
     </main>
   );
 }
