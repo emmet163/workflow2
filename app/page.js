@@ -126,27 +126,58 @@ const [uploadedFile, setUploadedFile] = useState(null);
             <p>The production version can use an approved Brightspace OAuth connection to import course deadlines without storing your Marquette password.</p>
           </div>
         </aside>
-      </section>           
+      </section>
               
 <section>
-  <h2>Upload Schedule or Syllabus</h2>
+  <div className="sectionHead">
+    <div>
+      <span className="eyebrow">AI IMPORT</span>
+      <h2>Upload Schedule or Syllabus</h2>
+    </div>
+  </div>
 
-  <input
-    type="file"
-    accept=".pdf,image/*"
-    onChange={(e) => setUploadedFile(e.target.files[0])}
-  />
-    <section>
-  <h2>Upload Schedule or Syllabus</h2>
+  <div className="card">
+    <input
+      type="file"
+      accept=".pdf,image/*"
+      onChange={(e) => setUploadedFile(e.target.files[0])}
+    />
 
-  <input
-    type="file"
-    accept=".pdf,image/*"
-    onChange={(e) => setUploadedFile(e.target.files[0])}
-  />
+    {uploadedFile && (
+      <div style={{ marginTop: "15px" }}>
+        <p>
+          <strong>Selected:</strong> {uploadedFile.name}
+        </p>
+
+        <button
+  onClick={async () => {
+    if (!uploadedFile) {
+      alert("Please upload a file first.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("file", uploadedFile);
+
+    const res = await fetch("/api/analyze", {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await res.json();
+
+    alert(data.message);
+  }}
+>
+  Organize Schedule with AI
+</button>
+          
+      </div>
+    )}
+  </div>
 </section>
       
-<footer>SchoolFlow • Starter build</footer>
+      <footer>SchoolFlow • Starter build</footer>
     </main>
   );
 }
