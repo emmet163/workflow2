@@ -135,29 +135,16 @@ const [uploadedFile, setUploadedFile] = useState(null);
     accept=".pdf,image/*"
     onChange={(e) => setUploadedFile(e.target.files[0])}
   />
+    <section>
+  <h2>Upload Schedule or Syllabus</h2>
 
-  {uploadedFile && (
-    <div>
-      <p>Selected: {uploadedFile.name}</p>
-
-      <button
-        onClick={async () => {
-          const formData = new FormData();
-          formData.append("file", uploadedFile);
-
-          const res = await fetch("/api/analyze", {
-            method: "POST",
-            body: formData,
-            
-          const data = await res.json();
-          alert(data.message);
-        Organize Schedule with AI
-          
-      </button>
-    </div>
-  )}
+  <input
+    type="file"
+    accept=".pdf,image/*"
+    onChange={(e) => setUploadedFile(e.target.files[0])}
+  />
 </section>
-    
+      
 <footer>SchoolFlow • Starter build</footer>
     </main>
   );
