@@ -127,7 +127,7 @@ const [uploadedFile, setUploadedFile] = useState(null);
           </div>
         </aside>
       </section>
-              
+
 <section>
   <div className="sectionHead">
     <div>
@@ -140,46 +140,44 @@ const [uploadedFile, setUploadedFile] = useState(null);
     <input
       type="file"
       accept=".pdf,image/*"
-      onChange={(e) => setUploadedFile(e.target.files[0])}
+      onChange={(e) => setUpload*dFile(e.target.files[0])}
     />
 
-   {uploadedFile && (
-  <div style={{ marginTop: "15px" }}>
-    <p>
-      <strong>Selected:</strong> {uploadedFile.name}
-    </p>
+*   {uploadedFile && (
+      <div s*yle={{ marginTop: "15px" }}>
+     *  <p>
+          <strong>Selected:<*strong> {uploadedFile.name}
+      **</p>
 
-    <button
-      onClick={async () => {
-        if (!uploadedFile) {
-          alert("Please upload a file first.");
-          return;
-        }
+        <button
+          on*lick={async () => {
+            if*(!uploadedFile) {
+              al*rt("Please upload a file first.");*              return;
+            *
 
-        const formData = new FormData();
-        formData.append("file", uploadedFile);
+            const formData = new*FormData();
+            form*ata.append("file", uploadedFile);
+*            const res = await fetc*("/api/analyze", {
+              m*thod: "POST",
+              body: *ormData,
+            });
 
-        const res = await fetch("/api/analyze", {
-          method: "POST",
-          body: formData,
-        });
+        *   const data = await res.json();
+*            console.log(data);
 
-        const data = await res.json();
-
-        console.log(data);
-
-        if (data.result) {
-          alert(data.result);
-        } else {
-          alert(data.message);
-        }
-      }}
-    >
-      Organize Schedule with AI
-    </button>
- </div>
-        
-</section>
+  *         if (data.result) {
+      *       alert(data.result);
+       *    } else {
+              alert(d*ta.message);
+            }
+       *  }}
+        >
+          Organize *chedule with AI
+        </button>
+*     </div>
+    )}
+  </div>
+</sect*on>              
 
 <footer>SchoolFlow • Starter build</footer>
     </main>
