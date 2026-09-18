@@ -143,40 +143,43 @@ const [uploadedFile, setUploadedFile] = useState(null);
       onChange={(e) => setUploadedFile(e.target.files[0])}
     />
 
-    {uploadedFile && (
-      <div style={{ marginTop: "15px" }}>
-        <p>
-          <strong>Selected:</strong> {uploadedFile.name}
-        </p>
+   {uploadedFile && (
+  <div style={{ marginTop: "15px" }}>
+    <p>
+      <strong>Selected:</strong> {uploadedFile.name}
+    </p>
 
-        <button
-  onClick={async () => {
-    if (!uploadedFile) {
-      alert("Please upload a file first.");
-      return;
-    }
+    <button
+      onClick={async () => {
+        if (!uploadedFile) {
+          alert("Please upload a file first.");
+          return;
+        }
 
-    const formData = new FormData();
-    formData.append("file", uploadedFile);
+        const formData = new FormData();
+        formData.append("file", uploadedFile);
 
-    const res = await fetch("/api/analyze", {
-      method: "POST",
-      body: formData,
-    });
+        const res = await fetch("/api/analyze", {
+          method: "POST",
+          body: formData,
+        });
 
-    const data = await res.json();
+        const data = await res.json();
 
-    alert(data.message);
-  }}
->
-  Organize Schedule with AI
-</button>
-          
-      </div>
-    )}
+        console.log(data);
+
+        if (data.result) {
+          alert(data.result);
+        } else {
+          alert(data.message);
+        }
+      }}
+    >
+      Organize Schedule with AI
+    </button>
   </div>
-</section>
-      
+)}
+    
       <footer>SchoolFlow • Starter build</footer>
     </main>
   );
