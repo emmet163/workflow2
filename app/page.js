@@ -166,7 +166,12 @@ const [uploadedFile, setUploadedFile] = useState(null);
 
     const data = await res.json();
 
-    alert(data.message);
+   if (data.result) {
+  console.log(data.result);
+  alert(data.result);
+} else {
+  alert(data.message);
+}
   }}
 >
   Organize Schedule with AI
