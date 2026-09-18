@@ -178,6 +178,7 @@ const [uploadedFile, setUploadedFile] = useState(null);
       Organize Schedule with AI
     </button>
  </div>
+        
 </section>
 
 <footer>SchoolFlow • Starter build</footer>
