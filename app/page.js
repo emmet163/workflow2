@@ -148,14 +148,25 @@ const [uploadedFile, setUploadedFile] = useState(null);
         <p>
           <strong>Selected:</strong> {uploadedFile.name}
         </p>
-       <button
-  onClick={() => {
+
+        <button
+  onClick={async () => {
     if (!uploadedFile) {
       alert("Please upload a file first.");
       return;
     }
 
-    alert(`AI will analyze: ${uploadedFile.name}`);
+    const formData = new FormData();
+    formData.append("file", uploadedFile);
+
+    const res = await fetch("/api/analyze", {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await res.json();
+
+    alert(data.message);
   }}
 >
   Organize Schedule with AI
