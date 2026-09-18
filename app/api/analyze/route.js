@@ -1,25 +1,26 @@
+import OpenAI from "openai";
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+
 export async function POST(req) {
   try {
     const formData = await req.formData();
-
     const file = formData.get("file");
 
     if (!file) {
-      return Response.json(
-        { error: "No file uploaded" },
-        { status: 400 }
-      );
+      return Response.json({
+        message: "No file uploaded"
+      });
     }
 
     return Response.json({
-      success: true,
-      filename: file.name,
-      message: `Successfully received ${file.name}`
+      message: `Received ${file.name}. AI connection is working.`
     });
   } catch (error) {
-    return Response.json(
-      { error: error.message },
-      { status: 500 }
-    );
+    return Response.json({
+      message: error.message
+    });
   }
 }
