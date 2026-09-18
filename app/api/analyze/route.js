@@ -15,12 +15,35 @@ export async function POST(req) {
       });
     }
 
-    return Response.json({
-      message: `Received ${file.name}. AI connection is working.`
+    const prompt = `
+    The user uploaded a course schedule or syllabus.
+
+    Extract:
+    - course name
+    - assignments
+    - due dates
+    - exams
+
+    Return the information in a clean list.
+    `;
+
+    const response = await openai.chat.completions.create({
+      model: "gpt-4o-mini",
+      messages: [
+        {
+          role: "system",
+          content: prompt,
+        }
+      ],
     });
+
+    return Response.json({
+      message: response.choices[0].message.content,
+    });
+
   } catch (error) {
     return Response.json({
-      message: error.message
+      message: error.message,
     });
   }
 }
