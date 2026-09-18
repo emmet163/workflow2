@@ -148,9 +148,19 @@ const [uploadedFile, setUploadedFile] = useState(null);
         <p>
           <strong>Selected:</strong> {uploadedFile.name}
         </p>
-        <button>
-          Organize Schedule with AI
-        </button>
+       <button
+  onClick={() => {
+    if (!uploadedFile) {
+      alert("Please upload a file first.");
+      return;
+    }
+
+    alert(`AI will analyze: ${uploadedFile.name}`);
+  }}
+>
+  Organize Schedule with AI
+</button>
+          
       </div>
     )}
   </div>
