@@ -23,10 +23,12 @@ const days = ['Monday','Tuesday','Wednesday','Thursday','Friday'];
 
 export default function Home() {
   const [tasks, setTasks] = useState(initialTasks);
-  const [events, setEvents] = useState(initialEvents);
+  const [events, setEvents] = useState(initialEvents);  
   const [task, setTask] = useState({ title:'', course:'', due:'', minutes:'30' });
   const [event, setEvent] = useState({ day:'Monday', time:'', name:'', type:'Class' });
-
+  
+const [uploadedFile, setUploadedFile] = useState(null);
+  
   const next = tasks.find(t => !t.done);
   const completed = tasks.filter(t => t.done).length;
 
@@ -125,7 +127,35 @@ export default function Home() {
           </div>
         </aside>
       </section>
+              
+<section>
+  <div className="sectionHead">
+    <div>
+      <span className="eyebrow">AI IMPORT</span>
+      <h2>Upload Schedule or Syllabus</h2>
+    </div>
+  </div>
 
+  <div className="card">
+    <input
+      type="file"
+      accept=".pdf,image/*"
+      onChange={(e) => setUploadedFile(e.target.files[0])}
+    />
+
+    {uploadedFile && (
+      <div style={{ marginTop: "15px" }}>
+        <p>
+          <strong>Selected:</strong> {uploadedFile.name}
+        </p>
+        <button>
+          Organize Schedule with AI
+        </button>
+      </div>
+    )}
+  </div>
+</section>
+      
       <footer>SchoolFlow • Starter build</footer>
     </main>
   );
