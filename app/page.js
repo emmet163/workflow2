@@ -126,58 +126,7 @@ const [uploadedFile, setUploadedFile] = useState(null);
             <p>The production version can use an approved Brightspace OAuth connection to import course deadlines without storing your Marquette password.</p>
           </div>
         </aside>
-      </section>
-
-<section>
-  <div className="sectionHead">
-    <div>
-      <span className="eyebrow">AI IMPORT</span>
-      <h2>Upload Schedule or Syllabus</h2>
-    </div>
-  </div>
-
-  <div className="card">
-    <input
-      type="file"
-      accept=".pdf,image/*"
-      onChange={(e) => setUpload*dFile(e.target.files[0])}
-    />
-
-*   {uploadedFile && (
-      <div s*yle={{ marginTop: "15px" }}>
-     *  <p>
-          <strong>Selected:<*strong> {uploadedFile.name}
-      **</p>
-
-        <button
-          on*lick={async () => {
-            if*(!uploadedFile) {
-              al*rt("Please upload a file first.");*              return;
-            *
-
-            const formData = new*FormData();
-            form*ata.append("file", uploadedFile);
-*            const res = await fetc*("/api/analyze", {
-              m*thod: "POST",
-              body: *ormData,
-            });
-
-        *   const data = await res.json();
-*            console.log(data);
-
-  *         if (data.result) {
-      *       alert(data.result);
-       *    } else {
-              alert(d*ta.message);
-            }
-       *  }}
-        >
-          Organize *chedule with AI
-        </button>
-*     </div>
-    )}
-  </div>
-</sect*on>              
+      </section>           
 
 <footer>SchoolFlow • Starter build</footer>
     </main>
